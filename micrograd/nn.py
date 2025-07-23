@@ -25,7 +25,7 @@ class Layer(Module):
     self.neurons = [Neuron(nin, **kwargs) for _ in range(nout)]
 
   def __call__(self, xs):
-    acts = [n(xs) for n in self.neurons]
+    acts = [neuron(xs) for neuron in self.neurons]
     return acts[0] if len(acts) == 1 else acts
 
   def parameters(self):
@@ -34,7 +34,7 @@ class Layer(Module):
 class MLP(Module):
   def __init__(self, nin, nouts):
     sz = [nin] + nouts
-    self.layers = [Layer(sz[i], sz[i+1], nonlin=i!=len(nouts)-1) for i in range(len(nouts))]
+    self.layers = [Layer(sz[i], sz[i + 1], nonlin=(i != len(nouts) - 1)) for i in range(len(nouts))]
 
   def __call__(self, xs):
     for layer in self.layers:

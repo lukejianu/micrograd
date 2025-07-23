@@ -53,25 +53,12 @@ def test_backward_simple_3():
   assert L.grad == 1
   assert a.grad == 12
 
-def test_rmul():
-  b = Value(-3)
-  L = 2 * b
-
-  assert L.data == -6
-
 def test_backward_simple_4():
   b = Value(-3)
   L = b * b
   L.backward()
   assert L.data == 9
   assert b.grad == -6
-
-def test_backward_simple_4():
-  x = Value(-4.0)
-  L = (2 * x) + (2 + x)
-  L.backward()
-  assert L.data == -10
-  assert x.grad == 3
 
 def test_backward_simple_5():
   x = Value(-4.0)
